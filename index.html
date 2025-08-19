@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Q2 Earnings — Interactive RevealJS Deck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- Reveal.js core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css" id="theme" />
+    <!-- Code highlighting theme -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/plugin/highlight/monokai.css" />
+    <style>
+      .reveal .slide-logo { position: fixed; left: 16px; bottom: 16px; opacity: 0.9; }
+      .reveal .byline { font-size: 0.6em; opacity: 0.8; }
+      .reveal .kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .reveal .kpi .card {
+        border-radius: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.08); box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        backdrop-filter: blur(6px);
+      }
+      .reveal .card h3 { margin: 0.2rem 0 0.6rem; }
+      .badge { display:inline-block; padding:.25rem .6rem; border-radius:999px; background:#222; border:1px solid #444; font-size:.55em; vertical-align: middle; }
+      .cta { font-size:.7em; }
+      .left { text-align:left; }
+      .right { text-align:right; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- TITLE -->
+        <section data-background-gradient="linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)">
+          <h2>Quarterly Earnings Report</h2>
+          <p class="byline">Technical Consultant • Major Financial Institution</p>
+          <p class="byline">Contact: <strong>23f2003824@ds.study.iitm.ac.in</strong></p>
+          <p class="cta"><span class="badge">Tip</span> Press <kbd>F</kbd> to go fullscreen • <kbd>S</kbd> for speaker notes</p>
+          <aside class="notes">
+            Welcome and agenda. Keep this to 30–45 seconds. Mention that the deck is interactive (code, math, fragments).
+          </aside>
+        </section>
+
+        <!-- AGENDA with fragments -->
+        <section>
+          <h3>Agenda</h3>
+          <ul>
+            <li class="fragment fade-up">Headline KPIs</li>
+            <li class="fragment fade-up">Revenue &amp; Expense Trends</li>
+            <li class="fragment fade-up">Risk &amp; Capital</li>
+            <li class="fragment fade-up">Technology Highlights</li>
+            <li class="fragment fade-up">Outlook &amp; Q&amp;A</li>
+          </ul>
+          <aside class="notes">
+            Use fragments to reveal one talking point at a time. Pause briefly between reveals to let the audience absorb each item.
+          </aside>
+        </section>
+
+        <!-- KPI grid with fragments -->
+        <section>
+          <h3>Headline KPIs (Q2)</h3>
+          <div class="kpi">
+            <div class="card fragment fade-in-then-semi-out">
+              <h3>Revenue</h3>
+              <p><strong>₹ 12,450 Cr</strong> <span class="badge">+7% YoY</span></p>
+            </div>
+            <div class="card fragment fade-in-then-semi-out">
+              <h3>Net Income</h3>
+              <p><strong>₹ 2,180 Cr</strong> <span class="badge">+5% YoY</span></p>
+            </div>
+            <div class="card fragment fade-in-then-semi-out">
+              <h3>RoE</h3>
+              <p><strong>15.2%</strong> <span class="badge">+40 bps</span></p>
+            </div>
+          </div>
+          <aside class="notes">
+            Numbers are placeholders. Replace with final figures. Call out the driver behind RoE expansion.
+          </aside>
+        </section>
+
+        <!-- MARKDOWN SLIDE -->
+        <section data-markdown>
+<textarea data-template>
+### Revenue Mix *(Markdown slide)*
+- Retail Banking: **52%**
+- Corporate Banking: **31%**
+- Treasury & Markets: **11%**
+- Other: **6%**
+
+> Note: Mix shift towards Retail improves NIM resilience.
+</textarea>
+          <aside class="notes">
+            This slide demonstrates a Markdown-authored section rendered at runtime via the Markdown plugin.
+          </aside>
+        </section>
+
+        <!-- CODE with syntax highlighting -->
+        <section>
+          <h3>Analytics Snippet (Risk)</h3>
+          <pre><code class="language-python">
+import numpy as np
+
+def expected_loss(pd, lgd, ead):
+    """Basel-inspired expected loss"""
+    return pd * lgd * ead
+
+# Scenario grid
+pd = np.array([0.5, 1.0, 1.5]) / 100      # probabilities of default
+lgd = np.array([35, 45, 55]) / 100        # loss given default
+ead = 500_000                             # exposure at default (₹)
+
+grid = np.outer(pd, lgd) * ead
+print(grid.round(0))  # Heatmap-ready EL (₹)
+          </code></pre>
+          <aside class="notes">
+            Walk through EL = PD × LGD × EAD. Emphasize that code blocks are syntax highlighted via highlight.js.
+          </aside>
+        </section>
+
+        <!-- MATH (KaTeX) -->
+        <section>
+          <h3>Valuation &amp; Capital Math</h3>
+          <p>Net Present Value:</p>
+          <p>\\[ \\text{NPV} = \\sum_{t=0}^{T} \\frac{C_t}{(1+r)^t} \\]</p>
+          <p>Economic Capital (simplified):</p>
+          <p>\\[ EC = z_{\\alpha} \\cdot \\sigma_{\\text{loss}} \\]</p>
+          <aside class="notes">
+            Explain discount rate r selection and confidence level z_α used for tail risk.
+          </aside>
+        </section>
+
+        <!-- SIMPLE INTERACTIVE CHART (Chart.js) -->
+        <section>
+          <h3>Revenue Trend (Interactive)</h3>
+          <canvas id="revChart" width="900" height="450"></canvas>
+          <aside class="notes">
+            This chart runs entirely client-side. Update the data series during rehearsal.
+          </aside>
+        </section>
+
+        <!-- CLOSING -->
+        <section data-background="#0b132b" data-background-transition="zoom">
+          <h2>Thank You</h2>
+          <p>Questions? • <strong>23f2003824@ds.study.iitm.ac.in</strong></p>
+          <aside class="notes">
+            Redirect product questions to BU heads; tech questions to me. Invite stakeholders to the GitHub Pages link.
+          </aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Reveal core & plugins -->
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="https://unpkg.com/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/reveal.js/plugin/math/math.js"></script>
+    <script src="https://unpkg.com/reveal.js/plugin/notes/notes.js"></script>
+    <!-- Chart.js for the interactive chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      // Initialize Reveal
+      const deck = new Reveal({
+        hash: true,
+        slideNumber: true,
+        plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealNotes ],
+        // KaTeX configuration
+        math: {
+          katex: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js',
+          katexCSS: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+          strict: false
+        }
+      });
+      deck.initialize();
+
+      // Interactive chart (dummy data)
+      document.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('revChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Q2 FY24','Q3 FY24','Q4 FY24','Q1 FY25','Q2 FY25'],
+            datasets: [{
+              label: 'Revenue (₹ Cr)',
+              data: [10750, 10960, 11320, 12020, 12450],
+              tension: 0.35,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: true }, tooltip: { enabled: true } },
+            scales: { y: { beginAtZero: false } }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
